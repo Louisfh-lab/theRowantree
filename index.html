@@ -1,0 +1,115 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immersive Experience</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: black;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Fullscreen image */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* Dark overlay for readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.35);
+            z-index: -1;
+        }
+
+        /* Centered text */
+        .content {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .play-message {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background image -->
+    <img src="image.jpg" class="background-image" alt="Background">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h1>ENTER</h1>
+        <p>An immersive audiovisual experience</p>
+    </div>
+
+    <div class="play-message">
+        Click anywhere if audio does not start automatically.
+    </div>
+
+    <!-- Hidden audio player -->
+    <audio id="backgroundAudio" loop autoplay>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById("backgroundAudio");
+
+        // Attempt autoplay immediately
+        audio.play().catch(() => {
+            console.log("Autoplay blocked by browser.");
+        });
+
+        // Fallback: start playback on first interaction
+        document.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
+    </script>
+
+</body>
+</html>
+```
